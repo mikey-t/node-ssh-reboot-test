@@ -27,7 +27,7 @@ main()
     process.exit(0)
   })
   .catch(err => {
-    console.error('uncaught error: ', err)
+    console.error('caught error: ', err)
     process.exit(1)
   })
 

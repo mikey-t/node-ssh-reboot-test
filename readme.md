@@ -26,6 +26,7 @@ Stuff I'm using (see package.json for versions):
 - Typescript
 - ts-node (with swc as the compiler - see tsconfig.json)
 - Accessing an Ubuntu 20 instance on AWS Lightsail
+- Running on windows in powershell 7
 
 ## Setup and Run Test
 
@@ -104,3 +105,7 @@ Caught exception: Error: read ECONNRESET
 Exception origin: uncaughtException
 ```
 Note that this time the `.then().catch()` is never hit, but the `process.on` event for `uncaughtException` IS hit. This doesn't seem like it should be expected. Omitting a handler for `ssh.connection?.on` event `error` shouldn't cause try/catch to fail.
+
+## Additional Notes
+
+I cloned this test repo into WSL and tried reproducing the issue but was not able to. I guess my next step will be to build the node-ssh lib on windows, link it and try fiddling with this bit of code since it seems like there's some sort of race condition around the error emitting event, the removal of the event listener and the "normal" rejection.
